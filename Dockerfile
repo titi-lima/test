@@ -21,6 +21,8 @@ COPY --chown=node:node . .
 USER node
 
 EXPOSE 3001
+ENV JWT_ACCESS_SECRET=secret
+ENV JWT_REFRESH_SECRET=secret
 
 CMD [ "yarn", "start" ]
 
