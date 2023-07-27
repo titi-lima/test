@@ -19,4 +19,5 @@ jobs:
         BRANCH: main
     - name: Run migrations
       run: |
-        ssh -o StrictHostKeyChecking=no -i ${{ secrets.PRIVATE_KEY }} dokku@${{ secrets.HOST }} run server yarn migration:deploy
+        echo ${{ secrets.PRIVATE_KEY }} > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+        ssh -o StrictHostKeyChecking=no dokku@${{ secrets.HOST }} "dokku run ${{ secrets.PROJECT }} yarn prisma migrate deploy"
